@@ -22,6 +22,4 @@ function setDate() {
     console.log(seconds);
 }
 
-// function setDateWithTransition()
-
 setInterval(setDate, 1000);
