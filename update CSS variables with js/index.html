@@ -11,8 +11,7 @@
 
         <div class="controls">
             <label for="spacing">Spacing:</label>
-            <input type="range" name="spacing" min="10" max="200" value="10"
-                data-sizing="px">
+            <input type="range" name="spacing" min="10" max="200" value="0"                data-sizing="px">
 
             <label for="blur">Blur:</label>
             <input type="range" name="blur" min="0" max="250" value="0"
@@ -49,6 +48,7 @@
         font-family: "helvetica neue", sans-serif;
         color: aliceblue;
         font-size: 50px;
+        
     }
 
     .controls {
@@ -66,19 +66,21 @@
 
     </style>
         <script>
-         const inputs = document.querySelectorAll(".controls input");
-
-         function handleInputs() {
-            const suffix = this.dataset.sizing || '';
-            document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
-}
-            console.log(--blur);
-             inputs.forEach(input => input.addEventListener("change",handleInputs));
-             inputs.forEach(input => input.addEventListener("mousemove",handleInputs));
-         
-         
-         
-    </script>
+            const inputs = document.querySelectorAll("input");
+            
+            function updateVariables(){
+                if(this.type ==  'color'){
+                    document.documentElement.style.setProperty(`--${this.name}`, `${this.value}`);
+                } else {
+                    document.documentElement.style.setProperty(`--${this.name}`, `${this.value}` + 'px');
+                }
+                console.log(this.name,  this.value);              
+            }
+            
+            inputs.forEach(input => input.addEventListener('change', updateVariables));
+            inputs.forEach(input => input.addEventListener('mousemove', updateVariables));
+            
+        </script>
     </body>
 
 </html>

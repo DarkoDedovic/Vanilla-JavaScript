@@ -93,30 +93,26 @@
    //    7 - Sort - Sort the people alphabetically by last name
    //             7.1
 
-    //  const alpha = people.sort((lastOne, nextOne) => {
-    //      const [alast, afirst] = lastOne.split(', ');
-    //      const [blast, bfirst] = nextOne.split(', ');
-    //      return alast < blast ? -1 : 1;
-    //   })
-    //   console.log(alpha);
+   //  const alpha = people.sort((lastOne, nextOne) => {
+   //      const [alast, afirst] = lastOne.split(', ');
+   //      const [blast, bfirst] = nextOne.split(', ');
+   //      return alast < blast ? -1 : 1;
+   //   })
+   //   console.log(alpha);
 
    //8 - Reduce Exercise
 
-//    const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck'];
-//    const transportation = data.reduce(function(obj, item, i){
-//        if(!obj[item]){
-//             obj[item] = 0;
-//             console.log('krug broj , ' + i);
-//             console.log();
-            
-//        }
-//            obj[item]++ ;
-//            console.log(obj);   
-          
-//        return obj;     
-//    }, {});
+   //    const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck'];
+   //    const transportation = data.reduce(function(obj, item, i){
+   //        if(!obj[item]){
+   //             obj[item] = 0;   
+   //             console.log(!obj[item]);          
+   //        }
+   //            obj[item]++ ;
+   //            console.log(obj);   
 
-//    console.log(transportation);
-   
+   //        return obj;     
+   //    }, {});
 
-   //Sum up the instances of each of these
+   //    console.log(transportation);
+
