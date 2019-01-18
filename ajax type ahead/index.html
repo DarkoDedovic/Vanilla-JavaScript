@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ajax</title>
+</head>
+
+<body>
+
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+            crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
+        <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Flex Panels</title>
+    </head>
+
+    <style>
+        html {
+                box-sizing: border-box;           
+                font-weight: 100;
+                color: white;
+            }
+
+            body {
+                margin: 0;
+                background: #ffc600;     
+            }
+            input {
+                height: 60%;
+                width: 12em;
+                font-size: 30px !important;
+                border-radius:5px;
+                font-family: 'Indie Flower', cursive;
+            }
+            .container {
+               border: 1px solid blue;
+               display: flex;
+               padding-top: 100px;
+            }
+           
+            .search {
+                text-align: center;
+            }
+
+            .inputCity {     
+                margin: auto;      
+                flex-direction: column;
+            }
+
+            .suggestions {
+                text-align: left;
+                font-family: 'Indie Flower', cursive;
+                font-size: 1.2em;       
+            }
+            ol {
+                padding: 10px;
+            }
+            li {
+                display: flex;
+                justify-content: space-between;
+            }
+            .hl {
+                background-color: yellow;
+            }
+            
+            
+        </style>
+    <div class="container">
+        <div class="inputCity">
+            <input class="search rounded" placeholder="City or State" type="text" class="form-control" aria-label="Username"
+                aria-describedby="addon-wrapping">
+            <ol class="suggestions">
+                <li>Filter For A City</li>
+                <li>Or A State</li>
+            </ol>
+        </div>
+    </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" crossorigin="anonymous"></script>
+
+    <script>
+        let panel = document.querySelectorAll(".panel");
+        const endpoint =
+            "https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json";
+
+        const cities = [];
+
+        fetch(endpoint)
+            .then(res => res.json())
+            .then(data => {
+                cities.push(...data);
+                return cities;
+            });
+
+        function findMatches(wordToMatch, cities) {
+            return cities.filter(place => {
+                const regex = new RegExp(wordToMatch, 'gi');
+                return place.city.match(regex) || place.state.match(regex);
+            })
+        }
+
+        function numberWithCommas(x) {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+
+        function displayMatches() {
+            const matchArray = findMatches(this.value, cities);
+            const html = matchArray.map(place => {
+                const regex = new RegExp(this.value, 'gi');
+
+                const cityName = place.city.replace(regex, `<span class=\"hl\">${this.value}</span>`);
+                const stateName = place.state.replace(regex, `<span class=\"hl\">${this.value}</span>`);
+                
+                return `<li>
+                            <span>
+                                ${cityName}, ${stateName}
+                            </span>
+                            <span>
+                                ${numberWithCommas(place.population)}
+                             </span>
+                      </li>`
+
+            }).join('');
+            sugestions.innerHTML = html;
+            console.log(matchArray);
+        }
+
+        const searchInput = document.querySelector(".search");
+        const sugestions = document.querySelector(".suggestions");
+        searchInput.addEventListener('keyup', displayMatches);
+    </script>
+
+</body>
+
+</html>
