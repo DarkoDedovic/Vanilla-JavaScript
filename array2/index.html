@@ -27,7 +27,6 @@
                 year: 2015
             }
         ];
-
         const comments = [{
                 text: 'Love this',
                 id: 523423
@@ -51,7 +50,6 @@
         ]
         //Some
         const isAdult = people.some(person => new Date().getFullYear() - person.year < 18);
-
         console.log({isAdult});
         
         //Every 
@@ -63,13 +61,10 @@
          console.log(comment);
          
          //FindIndex()
-
          const index = comments.findIndex(comm => comm.id === 2039842);
          comments.splice(index, 1); 
          console.log(index);
          
-
-
     </script>
     </body>
 
