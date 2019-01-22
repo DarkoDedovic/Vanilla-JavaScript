@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Multiple checkbox</title>
+</head>
+
+<body>
+    <style>
+        body {
+        margin-top: 70px;
+        background-color: burlywood;
+        
+    }
+
+    .inbox {
+        display: flex;
+        width: 30%;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        margin: auto;
+    }
+ 
+    .item {
+        display: flex;   
+       width: 50%;
+        justify-content: left;
+        align-items: center;
+    }
+
+    </style>
+    <div class="inbox">
+        <div class="item">
+            <input type="checkbox" class="type">
+            <p>This is an inbox layout</p>
+        </div>
+        <div class="item"><input type="checkbox" class="type">
+            <p>Check one item</p>
+        </div>
+        <div class="item"><input type="checkbox" class="type">
+            <p>Hold down your Shift key</p>
+        </div>
+        <div class="item"><input type="checkbox" class="type">
+            <p>Check a lower item</p>
+        </div>
+        <div class="item"><input type="checkbox" class="type">
+            <p>Everything inbetween sould also be set to checked</p>
+        </div>
+        <div class="item"><input type="checkbox" class="type">
+            <p>Try do it with out any libraries</p>
+        </div>
+        <div class="item"><input type="checkbox" class="type">
+            <p>Just regular JavaScript</p>
+        </div>
+        <div class="item"><input type="checkbox" class="type">
+            <p>Good Luck</p>
+        </div>
+        <div class="item"><input type="checkbox" class="type">
+            <p>Don't forget to tweet your result</p>
+        </div>
+
+    </div>
+
+    <script>
+        const checkboxes = document.querySelectorAll('.type');
+        let checkedBoxes = [];
+        let counter = 0;
+
+        checkboxes.forEach((box, i) => {
+            box.addEventListener('change', checkState);
+            box.value = i;
+        });
+
+        function checkState() {
+            let startPoint = this.key;
+
+            checkedBoxes.push(this);
+            console.log(checkedBoxes);
+            let i = this.value;
+
+            if (checkedBoxes.length > 1) {
+                let lastCheckedEl = checkedBoxes.length - 1;
+                for (i; i < lastCheckedEl; i++) {
+                    return checkedBoxes[i].check = true;
+                }
+                console.log(checkedBoxes);
+
+                // console.log(checkedBoxes[lastCheckedEl]);
+                // console.log(lastCheckedEl);
+
+            }
+
+
+        }
+    </script>
+</body>
+
+</html>
