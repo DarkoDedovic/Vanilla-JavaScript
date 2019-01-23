@@ -15,7 +15,11 @@
         background-color: burlywood;
         
     }
-
+    .shadow {
+        -moz-box-shadow:    inset 0 0 10px #000000;
+        -webkit-box-shadow: inset 0 0 10px #000000;
+        box-shadow:         inset 0 0 10px #000000;
+}
     .inbox {
         display: flex;
         width: 30%;
@@ -27,13 +31,13 @@
  
     .item {
         display: flex;   
-       width: 50%;
+        width: 50%;
         justify-content: left;
         align-items: center;
     }
 
     </style>
-    <div class="inbox">
+    <div class="inbox shadow">
         <div class="item">
             <input type="checkbox" class="type">
             <p>This is an inbox layout</p>
@@ -66,36 +70,32 @@
     </div>
 
     <script>
-        const checkboxes = document.querySelectorAll('.type');
-        let checkedBoxes = [];
-        let counter = 0;
+        const checkboxes = document.querySelectorAll('.inbox input[type="checkbox"]');
+        checkboxes.forEach(checkBox => {
+            checkBox.addEventListener('click', handleCheck)
+        })
 
-        checkboxes.forEach((box, i) => {
-            box.addEventListener('change', checkState);
-            box.value = i;
-        });
+        let lastChecked;
 
-        function checkState() {
-            let startPoint = this.key;
+        function handleCheck(e) {
+            let inBetween = false;
 
-            checkedBoxes.push(this);
-            console.log(checkedBoxes);
-            let i = this.value;
+            if (e.shiftKey && this.checked) {
+                checkboxes.forEach(checkbox => {
 
-            if (checkedBoxes.length > 1) {
-                let lastCheckedEl = checkedBoxes.length - 1;
-                for (i; i < lastCheckedEl; i++) {
-                    return checkedBoxes[i].check = true;
-                }
-                console.log(checkedBoxes);
+                    if (checkbox.checked === true || checkbox === lastChecked) {
+                        console.log(this, lastChecked);
+                        inBetween = !inBetween;
 
-                // console.log(checkedBoxes[lastCheckedEl]);
-                // console.log(lastCheckedEl);
-
+                    }
+                    if (inBetween) {
+                        checkbox.checked = true;
+                    }
+                })
             }
-
-
+            lastChecked = this;
         }
+        console.log(checkboxes);
     </script>
 </body>
 
