@@ -17,7 +17,7 @@
             justify-content: center;
         }
         .player {
-            background-color: lightcoral;
+            background-color: lightskyblue;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -30,13 +30,28 @@
     .player:hover {
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     }  
+
+    .progress {
+        
+        background-color: black;
+        opacity: 0.3;
+        height: 5px;
+        padding: 0px;
+        width: 400px;
+    }
+
+    .progress__filled {
+        width: 0%;
+        background-color: lightgoldenrodyellow;
+        height: 100%;
+    }
+
     .player__controls {
             display: flex;
             flex-direction: row;
             justify-content: center;
             align-items: center;
-            height: 50px;
-            
+            height: 50px;     
     }
     iframe {
         margin-top: 10px;
@@ -45,47 +60,76 @@
         border: none;
         
     }
+    .toggle {
+        width: 50px;
+    }
 
     </style>
     <div class="player">
-        <iframe width="400" height="300" src="https://www.youtube.com/embed/cqyziA30whE" controls='0' class="player__video viewer">
-        </iframe>   
-        
-        <div class="progress">
-            <div class="progress__filled">
-            </div>
-        </div>
+        <video src='https://player.vimeo.com/external/258140699.sd.mp4?s=4e66af3e6843406a65133d127c72cc2c26e4d64f&profile_id=165'
+            width="400" height="250" class="player__video viewer">
+
+        </video>
+                <div class="progress">
+                    <div class="progress__filled">
+                    </div>
+                </div>
+
         <div class="player__controls">
             <button class="player__button toggle" title="Toggle Play">&#9654</button>
-            <input type="range" name="volume" class="player__slider" min="0" max="1" step="0.05" value=".5">
-            <input type="range" name="playBackRate" class="player__slider" min="0.5" max="2" step="0.01" value="1">
-            <button data-skip="-10" class="player__button">&lt;&lt; -10s</button>
-            <button data-skip="25" class="player__button">+25&gt;&gt;</button>
+            <input type="range" name="volume" class="player__slider" min="0" max="1" step="0.05" value=".2">
+            <input type="range" name="playBackRate" class="player__slider" min="0.5" max="1" step="0.01" value=".1">
+            <button data-skip="-2" class="player__button">&lt;&lt; -2s</button>
+            <button data-skip="2" class="player__button">+2&gt;&gt;</button>
         </div>
     </div>
 
     <script>
         const player = document.querySelector(".player");
-        const video = player.querySelector(".viewer");
+        const video = player.querySelector("video");
         const progress = player.querySelector(".progress");
         const progressBar = player.querySelector(".progress__filled");
         const ranges = player.querySelectorAll(".player__slider");
 
-        const toggle = player.querySelector('.toggle');
+        const playAndPause = player.querySelector('.toggle');
         const skipButtons = player.querySelectorAll("[data-skip]");
-        
-        console.log(video);
-        
-        function togglePlay(){
-            if(video.paused){
-                video.play();
-            } else {
-                video.pause();
-            }
+
+        video.addEventListener('click', togglePlay);
+        video.addEventListener('play', upDate);
+        video.addEventListener('pause', upDate);
+        playAndPause.addEventListener('click', togglePlay);
+
+        ranges.forEach(el => el.addEventListener('change', handleRangeUpdate));
+        ranges.forEach(el => el.addEventListener('mousemove', handleRangeUpdate));
+
+        skipButtons.forEach(btn => btn.addEventListener('click', skip))
+
+        function togglePlay() {
             const method = video.paused ? 'play' : 'pause';
             video[method]();
-            console.log(method);
+            setInterval(handleProgress, 1000);
         }
+
+        function upDate() {
+            const icon = this.paused ? '&#9654' : '&#10073&#10073';
+            playAndPause.innerHTML = icon;
+        }
+
+        function skip() {
+            video.currentTime += parseInt(this.dataset.skip);
+        }
+
+        function handleRangeUpdate() {
+            video[this.name] = this.value;   
+        }
+        
+        function handleProgress(){
+            const percent = video.duration / video.currentTime;
+            progressBar.style.width = percent + '%';
+            console.log(progressBar.width);
+            
+        }
+
     </script>
 </body>
 
