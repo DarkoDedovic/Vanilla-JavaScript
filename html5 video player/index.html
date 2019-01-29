@@ -31,8 +31,8 @@
     }  
 
     video {
-        width: 45%;
-        height:70%;
+        width: 55%;
+        /* height:70%; */
         transition: all .5s;
     }
       
@@ -43,13 +43,16 @@
     .progress {
         background-color: black;
         opacity: 0.3;
-        height: 40%;
-        padding: 0px;
+        height: 5px;
+        padding: 0;
+        width: 55%;
+        margin: 1%;
     }
 
-    .progress__filled {
-        width: 0%;
-        background-color: lightgoldenrodyellow;
+    .progress__filled {  
+        width: 0%;    
+        height: 100%;
+        background-color:lightseagreen;
     }
 
     .player__controls {
@@ -57,11 +60,33 @@
             flex-direction: row;
             justify-content: center;
             align-items: center;
+            width: 55%;
+            display: flex;
+            justify-content: space-between;
     }
 
     .toggle {
         width: 50px;
     }
+
+    .playerFullScreen {
+        height : 90vh;
+        width : 100%;
+    }
+
+    .videoFullScreen {
+        width : 80%;
+        height : 90%;
+    }
+
+    .progressFullScreen {
+        height : 1%;
+        width : 80%;
+    }
+
+    .controlsFullScreen{
+        width : 80%;
+        } 
 
     </style>
     <div class="player">
@@ -95,6 +120,7 @@
         const video = player.querySelector("video");
         const progress = player.querySelector(".progress");
         const progressBar = player.querySelector(".progress__filled");
+        const controls = player.querySelector(".player__controls");
         const ranges = player.querySelectorAll(".player__slider");
 
         const playAndPause = player.querySelector('.toggle');
@@ -103,6 +129,7 @@
 
         let switcher = false;
         let mousedown = false;
+        let smallOrFullScreen = false;
 
         video.addEventListener('click', togglePlay);
         video.addEventListener('play', upDate);
@@ -123,10 +150,22 @@
         resizeScreen.addEventListener('click', fullAndSmallScreen);
 
         function fullAndSmallScreen(e) {
-            player.style.width = '95%';
-            player.style.height = e.pageX + 'px';
+
+            smallOrFullScreen = !smallOrFullScreen;
+
+            if (smallOrFullScreen) {
+                player.classList.add('playerFullScreen');
+                video.classList.add('videoFullScreen');
+                progress.classList.add('progressFullScreen');
+                controls.classList.add('controlsFullScreen');
+
+            } else {
+                player.classList.remove('playerFullScreen');
+                video.classList.remove('videoFullScreen');
+                video.classList.remove('progressFullScreen');
+                controls.classList.remove('controlsFullScreen');
+            }
             console.log(e);
-            //nastaviti full and small screen
 
         }
 
@@ -173,6 +212,8 @@
         function handleProgress() {
             const percent = Math.round((video.currentTime / video.duration) * 100);
             progressBar.style.width = percent + '%';
+            console.log(percent);
+
         }
     </script>
 </body>
