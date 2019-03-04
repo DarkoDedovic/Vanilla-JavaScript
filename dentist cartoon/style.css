@@ -8,8 +8,8 @@ body {
 }
 
 .logo {
-    width: 90%;
-    border-radius: 50%;
+    width: 70%;
+    border-radius: 5%;
 }
 
 form {
@@ -32,6 +32,7 @@ form {
     align-items: center;
     flex-direction: column;
     width: 100%;
+    color: lightskyblue;
 }
 
 .logInOrReg {
@@ -42,7 +43,7 @@ form {
 }
 
 .logInOrReg a {
-    font-size: 3rem;
+    font-size: 2rem;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     color: lightskyblue;
     padding: 0 20px;
@@ -67,7 +68,43 @@ form {
 }
 
 .activeUnderline {
-    text-decoration: underline;
+    text-decoration: underline !important;
+}
+
+#home {
+    display: 'none';
+}
+
+.required label:after {
+    color: #e32;
+    content: ' *';
+    display:inline;
+}
+
+
+.patientLogo img {
+    width: 30%;
+    height: 30%;
+    border-radius: 50%;
+}
+
+.patientLogo {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    
+}
+
+#createUser {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    padding: 1% 0;
+    margin-bottom: 20px;
+    /* width: 40%; */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
 @media only screen and (max-width: 600px) {
