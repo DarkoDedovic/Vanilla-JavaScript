@@ -1,2 +1,0 @@
-
-    // newObj.push(element
