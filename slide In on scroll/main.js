@@ -19,9 +19,7 @@ function debounce(func, wait = 10, immediate = true) {
 function checkSlide (e) {
     sliderImages.forEach(slideImg => {
         const slideInAt = (window.scrollY + window.innerHeight) - slideImg.height / 2;
-        const halfPoint = slideImg.offsetTop + slideImg.height / 2;
-        console.log(slideInAt + ", " + halfPoint);
-        
+       
         console.log('skrolY: ' + window.scrollY + ', ' + 'view: ' + window.innerHeight + ", visina slike " + slideInAt);
         
         const imageBottom = slideImg.offsetTop + slideImg.height;
