@@ -8,7 +8,7 @@
     },
     "author": "",
     "licence": "ISC",
-    "devDepedencies": {
+    "devDependencies": {
         "browser-sync": "^2.12.5"
     }
 }
