@@ -27,7 +27,7 @@ function paintToCanvas() {
   canvas.width = width;
 
   return setInterval(() => {
-    ctx.drawImage(video, 0,  0, width, height);
+    ctx.drawImage(video, 0, 0, width, height);
     let pixels = ctx.getImageData(0, 0, width, height);
     console.log(pixels);
     pixels = redEffect(pixels);
@@ -51,7 +51,7 @@ function takePhoto() {
 }
 
 function redEffect(pixels) {
-  for(let i = 0; i < pixels.data.length; i+=4) {
+  for (let i = 0; i < pixels.data.length; i += 4) {
     pixels.data[i] = pixels.data[i] - 100; // red
     pixels.data[i + 1] = pixels.data[i + 1] - 50; // green
     pixels.data[i + 2] = pixels.data[i + 2] * 0.5; //blue
