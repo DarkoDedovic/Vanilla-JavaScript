@@ -83,7 +83,7 @@ function greenScreen(pixels) {
     blue = pixels.data[i + 1];
     green = pixels.data[i + 2];
     alpha = pixels.data[i + 3];
-debugger;
+    
     if (red >= levels.rmin &&
       green >= levels.gmin &&
       blue >= levels.bmin &&
