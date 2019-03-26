@@ -31,23 +31,44 @@
 
     <script>
         const msg = new SpeechSynthesisUtterance();
+
+
         let voices = [];
         const voiceDropDown = document.querySelector('[name=voice]');
         const options = document.querySelectorAll('[type="range"], [name="text"]');
         const speakButton = document.querySelector('#speak');
         const stopButotn = document.querySelector('#stop');
         msg.text = document.querySelector("[name=text]").value;
-        
-        
-        function populateVoices () {
-            voices = this.getVoices();
-            console.log(voices);
 
-            
+
+        function populateVoices() {
+            voices = this.getVoices();
+            voiceDropDown.innerHTML = voices
+                .map(voice => `<option value="${voice.name}">${voice.name} (${voice.lang})</option>`)
+                .join("");
+            console.log(voices);
         }
 
-        speechSynthesis.addEventListener('voiceschanged', populateVoices);
+        function setVoice() {
+            console.log(msg);
 
+            msg.voice = voices.find(voice => voice.name === this.value)
+            toggle();
+            // msg[this.name] = this.value;
+
+        }
+
+        function toggle () {
+            speechSynthesis.cancel();
+            speechSynthesis.speak(msg);
+        }
+
+        // options.forEach(option => {
+        //     option.addEventListener('change', setVoice);
+        // })
+
+        speechSynthesis.addEventListener('voiceschanged', populateVoices);
+        voiceDropDown.addEventListener("change", setVoice);
     </script>
 
     <style>

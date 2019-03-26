@@ -1,86 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Document</title>
-    </head>
-    <body>
-        <h2>Update CSS Variables with <span class="hl">JS</span></h2>
 
-        <div class="controls">
-            <label for="spacing">Spacing:</label>
-            <input type="range" name="spacing" min="10" max="200" value="0"                data-sizing="px">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
 
-            <label for="blur">Blur:</label>
-            <input type="range" name="blur" min="0" max="250" value="0"
-                data-sizing="px">
+<body>
+    <h2>Update CSS Variables with <span class="hl">JS</span></h2>
 
-            <label for="base">Base Color:</label>
-            <input type="color" name="base" value="#ffc600">
-        </div>
+    <div class="controls">
+        <label for="spacing">Spacing:</label>
+        <input type="range" name="spacing" min="10" max="200" value="0" data-sizing="px">
 
-        <img style="width:700px;height:500px;display:block;margin: 5px auto"
-            src="http://thewealthforums.com/wp-content/uploads/2016/06/belgrade_city-1.jpg"
-            alt="">
+        <label for="blur">Blur:</label>
+        <input type="range" name="blur" min="0" max="250" value="0" data-sizing="px">
 
-        <style>
+        <label for="base">Base Color:</label>
+        <input type="color" name="base" value="#ffc600">
+    </div>
+
+    <img style="width:700px;height:500px;display:block;margin: 5px auto"
+        src="http://thewealthforums.com/wp-content/uploads/2016/06/belgrade_city-1.jpg" alt="">
+
+    <style>
         :root {
             --base: #ffc600;
-            --spacing:10px;
-            --blur:0px;            
+            --spacing: 10px;
+            --blur: 0px;
         }
-        
+
         img {
             padding: var(--spacing);
             background-color: var(--base);
-            filter: blur(var(--blur));   
+            filter: blur(var(--blur));
         }
 
         .hl {
             color: var(--base);
         }
-        
-    body{
-        text-align: center;
-        background: #193549;
-        font-family: "helvetica neue", sans-serif;
-        color: aliceblue;
-        font-size: 50px;
-        
-    }
 
-    .controls {
-    margin-bottom: 50px;
-    }
+        body {
+            text-align: center;
+            background: #193549;
+            font-family: "helvetica neue", sans-serif;
+            color: aliceblue;
+            font-size: 50px;
 
-    a {
-        color: var(--base);
-        text-decoration: none;
-    }
+        }
 
-    input {
-        width: 100px;
-    }
+        .controls {
+            margin-bottom: 50px;
+        }
 
+        a {
+            color: var(--base);
+            text-decoration: none;
+        }
+
+        input {
+            width: 100px;
+        }
     </style>
-        <script>
-            const inputs = document.querySelectorAll("input");
-            
-            function updateVariables(){
-                if(this.type ==  'color'){
-                    document.documentElement.style.setProperty(`--${this.name}`, `${this.value}`);
-                } else {
-                    document.documentElement.style.setProperty(`--${this.name}`, `${this.value}` + 'px');
-                }
-                console.log(this.name,  this.value);              
+    <script>
+        const inputs = document.querySelectorAll("input");
+
+        function updateVariables() {
+            if (this.type == 'color') {
+                document.documentElement.style.setProperty(`--${this.name}`, `${this.value}`);
+            } else {
+                document.documentElement.style.setProperty(`--${this.name}`, `${this.value}` + 'px');
             }
-            
-            inputs.forEach(input => input.addEventListener('change', updateVariables));
-            inputs.forEach(input => input.addEventListener('mousemove', updateVariables));
-            
-        </script>
-    </body>
+            console.log(this.name, this.value);
+        }
+
+        inputs.forEach(input => input.addEventListener('change', updateVariables));
+        inputs.forEach(input => input.addEventListener('mousemove', updateVariables));
+    </script>
+</body>
 
 </html>
