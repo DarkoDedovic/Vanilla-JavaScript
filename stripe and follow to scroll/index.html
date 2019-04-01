@@ -9,9 +9,7 @@
 </head>
 
 <body>
-    <h1>dasadsa</h1>
-    <h1>dasadsa</h1>
-    <h1>dasadsa</h1>
+
     <nav class="top">
         <div class="dropdownBackground">
             <span class="arrow"></span>
@@ -236,7 +234,11 @@
         function handleEnter() {
 
             this.classList.add('trigger-enter');
-            setTimeout(() => this.classList.add('trigger-enter-active'), 150);
+            setTimeout(() => {
+                if (this.classList.contains('trigger-enter')) {
+                    this.classList.add('trigger-enter-active')
+                }
+            }, 150);
             background.classList.add('open');
 
             const dropdown = this.querySelector('.dropdown');
@@ -246,8 +248,8 @@
             const coords = {
                 width: dropdownCoords.width,
                 height: dropdownCoords.height,
-                top: dropdownCoords.top,
-                left: dropdownCoords.left
+                top: dropdownCoords.top - navCoords.top,
+                left: dropdownCoords.left - navCoords.left
             }
             console.log(nav.getBoundingClientRect().bottom);
 
@@ -260,8 +262,7 @@
 
         function handleLeave() {
             this.classList.remove('trigger-enter');
-            setTimeout(() => this.classList.remove('trigger-enter-active'), 150);
-            background.classList.remove('open');
+            this.classList.remove('trigger-enter-active');
         }
 
         triggers.forEach(trigger => trigger.addEventListener('mousemove', handleEnter));
