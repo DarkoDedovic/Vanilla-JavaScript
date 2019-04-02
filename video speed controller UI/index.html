@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Video controller</title>
+    </head>
+    <body>
+
+        <div class="wrapper">
+            <video class="flex" width="765" height="430"
+                src="https://www.youtube.com/embed/5wNfK8UXDqI&list=RD5wNfK8UXDqI&start_radio=1"
+                loop controls>
+            </video>
+            <div class="speed">
+                <div class="speed-bar">1x</div>
+            </div>
+        </div>
+
+        <style>
+
+            body {
+                background-color: orangered;
+            }
+
+            .wrapper {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                
+            }
+
+            .speed {
+                height: 400px;
+                width: 100px;
+                background-color: white;
+                border-radius: 40px;    
+                margin-left: 10px;
+                position: relative;
+            }
+
+            .speed-bar {
+                position: absolute;
+                width: 100%;
+                text-align: center;
+                border-top-left-radius: 40px;
+                border-top-right-radius: 40px;
+                display: flex;
+                background-color: purple;
+                justify-content: center;
+                align-items: center;
+               
+            }
+
+        </style>
+        <script>
+                const speed = document.querySelector('.speed');
+                const bar = speed.querySelector('.speed-bar');
+                const video = document.querySelector('.flex');
+
+                speed.addEventListener('mousemove', function(e) {
+                    const y = e.pageY - this.offsetTop;
+                    const percent = y / this.offsetHeight;
+                    const min = 0.4;
+                    const max = 4;
+                    const height = Math.round(percent * 100) + '%';
+                    bar.style.height = height;
+                    let playback = percent * (max - min) + min;
+                    bar.textContent = playback.toFixed(2) + 'x';
+                    video.playbackRate = playback;
+                })
+    
+       </script>
+    </body>
+</html>
